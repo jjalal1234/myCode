@@ -28,5 +28,5 @@ today = dt.datetime.now().strftime("%Y-%m-%d")
 filename = input("\nWhat is the name of the *.xls file? ")
 filename  = today + "." + filename + ".xls"
 pyexcel.save_as(records=mylistdict, dest_file_name=filename)
-print("The file " + filename + ".xls should be in you local directory")
+print("The file " + filename + " should be in you local directory")
 print(mylistdict)
