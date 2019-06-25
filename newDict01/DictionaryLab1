@@ -1,0 +1,21 @@
+#!/usr/bin/env python3
+
+hosts = [{"server": "North", "IP": "10.1.2.3"},
+         {"server": "South", "IP": "10.4.5.6"},
+         {"server": "West", "IP": "10.7.8.9"},]
+
+hosts.append({"server": "East", "IP": "10.10.11.12"})
+
+print(hosts)
+
+print("\n =============================================================== \n")
+
+print(hosts[0]['server'] + " " + hosts[0]['IP'])
+print(hosts[1]['server'] + " " + hosts[1]['IP'])
+print(hosts[2]['server'] + " " + hosts[2]['IP'])
+print(hosts[3]['server'] + " " + hosts[3]['IP'])
+
+
+print("\n ========== Using for loop =============== \n")
+for items in hosts:
+    print(items['server'] + " " + items['IP'])
