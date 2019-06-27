@@ -1,0 +1,30 @@
+---
+- name: Another network playbook example
+  # The line below uses regex to parse the inventory file
+  hosts: ~^arista
+  # gather_facts ALWAYS runs setup.py (server module)
+  gather_facts: no 
+
+  tasks:
+    # if we run this and have gather_facts set to no, then ansible_facts will be about our network dev
+    - name: Harvest Arista facts
+      eos_facts:
+      when: ansible_network_os == 'eos'
+
+    - name: Push to the local system
+      copy:
+        content: "{{ ansible_facts | to_nice_json }}"
+        dest: "/home/student/mycode/{{ inventory_hostname }}"
+      tags:
+        - never
+        - grabfacts
+
+      # Precheck conditiional number of interfaces
+    - fail:
+        msg: "FAIL. Network device lacks the correct number of interfaces." 
+      when: ansible_facts.net_interfaces | length != 13
+
+    # Firmware precheck on correct major and minor versions
+    - fail:
+        msg: "FAIL. Network device is running firmware."
+      when: "'4.7' not in ansible_facts_net_version"
